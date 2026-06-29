@@ -1,0 +1,25 @@
+# Web framework
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+
+# HTTP client for provider calls
+httpx==0.28.1
+
+# Config & validation
+pydantic==2.10.4
+pydantic-settings==2.7.1
+
+# Rate limiting
+slowapi==0.1.9
+
+# Retry with backoff
+tenacity==9.0.0
+
+# Token counting (optional at runtime; code falls back to a heuristic if missing)
+tiktoken==0.8.0
+
+# Database (Supabase / Postgres)
+supabase==2.11.0
+
+# Testing
+pytest==9.0.3
