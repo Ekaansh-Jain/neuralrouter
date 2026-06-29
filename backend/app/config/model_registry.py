@@ -58,14 +58,14 @@ MODEL_POOL: dict[str, ModelSpec] = {
         completion_usd_per_1m=0.79,
         context_window=131072,
     ),
-    "groq/mixtral-8x7b": ModelSpec(
-        key="groq/mixtral-8x7b",
+    "groq/gemma2-9b": ModelSpec(
+        key="groq/gemma2-9b",
         provider="groq",
-        model_id="mixtral-8x7b-32768",
-        label="Mixtral 8x7B (Groq)",
-        prompt_usd_per_1m=0.24,
-        completion_usd_per_1m=0.24,
-        context_window=32768,
+        model_id="gemma2-9b-it",
+        label="Gemma 2 9B (Groq)",
+        prompt_usd_per_1m=0.20,
+        completion_usd_per_1m=0.20,
+        context_window=8192,
     ),
     "openrouter/llama-3.1-8b-free": ModelSpec(
         key="openrouter/llama-3.1-8b-free",
@@ -89,13 +89,13 @@ FALLBACK_CHAINS: dict[str, list[str]] = {
         "openrouter/llama-3.1-8b-free",
     ],
     MODERATE: [
-        "groq/mixtral-8x7b",
+        "groq/gemma2-9b",
         "groq/llama-3.1-8b",
         "openrouter/llama-3.1-8b-free",
     ],
     COMPLEX: [
         "groq/llama-3.3-70b",
-        "groq/mixtral-8x7b",
+        "groq/gemma2-9b",
         "openrouter/llama-3.1-8b-free",
     ],
 }

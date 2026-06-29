@@ -38,7 +38,7 @@ class MockProvider:
 
     async def complete(self, model_id: str, prompt: str, *, timeout: float) -> ProviderResult:
         # Bigger models are slower; add jitter.
-        size_factor = 3.0 if "70b" in model_id else (1.6 if "mixtral" in model_id else 1.0)
+        size_factor = 3.0 if "70b" in model_id else (1.3 if "gemma" in model_id else 1.0)
         latency_ms = self.base_latency_ms * size_factor * self._rng.uniform(0.7, 1.5)
         await asyncio.sleep(min(latency_ms / 1000.0, timeout))
 

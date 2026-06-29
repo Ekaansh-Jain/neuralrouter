@@ -80,7 +80,15 @@ def classify_status(status_code: int) -> ErrorCategory:
     """Map an HTTP status code to an error category."""
     if status_code == 429:
         return ErrorCategory.RATE_LIMITED
-    if status_code in (400, 401, 403, 404, 422):
+    # 404 = model/endpoint not found (e.g. a decommissioned model id). A
+    # *different* model in the chain may still work, so fall back rather than
+    # stop. Treated as provider-down so a permanently-gone model trips its
+    # breaker and gets skipped on later requests.
+    if status_code == 404:
+        return ErrorCategory.PROVIDER_DOWN
+    # 400/401/403/422 = malformed request or auth. These fail identically on
+    # every model, so stop the chain.
+    if status_code in (400, 401, 403, 422):
         return ErrorCategory.INVALID_REQUEST
     if status_code >= 500:
         return ErrorCategory.PROVIDER_DOWN
